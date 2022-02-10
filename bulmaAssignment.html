@@ -17,6 +17,12 @@
     <!--Below this is the link for all the FONT AWESOME icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.css">
 </head>
+<!--The following will strike through my list elements when they are checked off!-->
+<style>
+    :checked + span{
+      text-decoration: line-through;
+    }
+</style>
 <body>
 <!-- First I will put in the navbar-->
 <!--Change background color of the nav bar to primary -->
@@ -127,36 +133,37 @@
     </div>
     <!--Second column-->
     <div class="column is-half">
+
         <article class="panel">
-            <!--Here we have the tabs structure-->
+            
             <div class="tabs is-boxed">
                 <ul>
-                    <li class="is-active">
+                    <li id="Current">
                         <a>
                           <span class="icon is-small"><i class="fas fa-clipboard-list"></i></span>
                           <span>Current</span>
                         </a>
                     </li>
-                    <li>
+                    <li id="Completed">
                         <a>
                           <span class="icon is-small"><i class="fas fa-calendar-times"></i></span>
                           <span>Completed</span>
                         </a>
                     </li>
-                    <li>
+                    <li id="All">
                         <a>
                           <span class="icon is-small"><i class="fas fa-calendar-day"></i></span>
                           <span>Upcoming</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="is-active" id="All">
                         <a>
                           <span class="icon is-small"><i class="fas fa-calendar"></i></span>
                           <span>All</span>
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> 
             <!--Here we have the typing in field-->
             <div class="panel-block">
                 <p class="control has-icons-left">
@@ -167,11 +174,11 @@
                 </p>
             </div>
             <!--Here we have the list of checkbox fields-->        
-                <a class="panel-block"><label class="checkbox"><input type="checkbox">  Make Bulma great again</label></a>
-                <a class="panel-block"><label class="checkbox"><input type="checkbox">  Add some more features</label></a>
-                <a class="panel-block"><label class="checkbox"><input type="checkbox">  Make a github account</label></a>
-                <a class="panel-block"><label class="checkbox"><input type="checkbox">  Learn how to use github</label></a>
-                <a class="panel-block"><label class="checkbox"><input type="checkbox">  add a .gitignore file</label></a>
+                <a class="panel-block"><input type="checkbox" checked><span> Make Bulma great again</span></a>
+                <a class="panel-block"><input type="checkbox"> <span>Add some more features</span></a>
+                <a class="panel-block"><input type="checkbox"> <span>Make a github account</span></a>
+                <a class="panel-block"><input type="checkbox"> <span>Learn how to use github</span></a>
+                <a class="panel-block"><input type="checkbox"> <span>add a .gitignore file</span></a>
         </article>
     </div>
     <!--Third column-->
@@ -214,5 +221,30 @@
       </aside>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    //This will let you make tabs clickable the JQuery way
+      $(".tabs li").click(function(){
+          $(".tabs li.is-active").removeClass("is-active");
+          $(this).addClass("is-active");
+      }) 
+
+    //Depending on which tab is active, different things should be either shown or hidden
+    //For the current tab- show UNCHECKED boxes (hide checked)
+    $("#Current").click(function(){
+        $(".panel-block").show();
+        $("input:checked").closest(".panel-block").hide();
+    });
+
+    //For the Completed section- show CHECKED boxes (hide unchecked)
+    $("#Completed").click(function(){
+        $(".panel-block").show();
+        $("input:not(:checked)").closest(".panel-block").hide();
+    });
+    //For the other two sections- show everything
+    $("#All").click(function(){
+        $(".panel-block").show();
+    });
+  </script>
 </body>
 </html>
