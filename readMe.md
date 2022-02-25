@@ -3,4 +3,6 @@
 ---
 
 ## Contents:
-1. Bulma Assignment
+1. CSS Dropdown Menu Assignment
+2. Bulma Assignment (with JQuery Clickable Tabs)
+3. To-Do List with clickable tabs and moving elements using vue

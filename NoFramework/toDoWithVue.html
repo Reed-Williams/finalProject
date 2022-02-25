@@ -1,0 +1,153 @@
+<!--Can't figure out why the background of the task bar doesn't show up until after I click add...-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List using Bulma and Vue</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
+</head>
+<body>
+<!--Entire body gets put in the div with the app id-->
+    <div id="app">
+        <!--Title-->
+        <div class="container">
+            <h1 class="title">What do you have to do?</h1>
+        </div>
+        <div class="columns">
+            <!--Col 1-->
+            <div class="column is-one-quarter">
+                <article class="message is-success">
+                    <div class="message-header">
+                      <p>Success</p>
+                      <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                        Today is a great day to be productive:)
+                    </div>
+                  </article>
+            </div>
+            <!--To Do list-->
+            <div class="column is-half">
+                <article class="panel">
+                    <!--First we have the clickable tabs------------------------------------------------------------------->
+                    <div class="tabs is-boxed">
+                        <!--When a tab is set to currentTab, it is active. When a tab is clicked, it is set to currentTab-->
+                        <ul>    
+                            <li :class="{ 'is-active': currentTab == 'Current' }" @click=" currentTab = 'Current' ">
+                                <a>
+                                    <span class="icon is-small"><i class="fas fa-clipboard-list"></i></span>
+                                    <span>Current</span>
+                                </a>
+                            </li>
+                            <li :class="{ 'is-active': currentTab == 'Completed' }" @click=" currentTab = 'Completed' ">
+                                <a>
+                                    <span class="icon is-small"><i class="fas fa-calendar-times"></i></span>
+                                    <span>Completed</span>
+                                </a>
+                            </li>
+                            <li :class="{ 'is-active': currentTab == 'All' }" @click=" currentTab = 'All' ">
+                                <a>
+                                    <span class="icon is-small"><i class="fas fa-calendar-day"></i></span>
+                                    <span>All</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Next we have the input text field-------------------------------------------------------------------->
+                    <!--When something is entered, the page is prevented from reloading and addCurrentTask is called-->
+                    <form @submit.prevent="addCurrentTask">
+                        <div class="field has-addons">
+                            <div class="control has-icons-left is-expanded">
+                                <!--v-model="userInput" will take the user's input and store it in our vue data item named userInput-->
+                                <input class="input is-primary" type="text" placeholder="What else do you need to do?" v-model="userInput">
+                                <span class="icon is-left"><i class="fas fa-calendar-plus" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="control">
+                                <button class="button">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!--Next we have the list of checkboxes section------------------------------------------------------------>
+                    <!--We want a for loop that will display the disired tasks for the current tab-->
+                        <!--
+                            -tabTasks will return an array with the desired tasks for the given currentTab
+                            -:key is needed to iterate through the list
+                            -if the current tab is All and a task is completed, the checkbox should apprear active
+                        -->
+                    
+                        <a class="panel-block" v-for="task in tabTasks" :key="task.taskName" :class="{ 'is-completed': currentTab != 'Completed' && task.completed }">
+                            <input type="checkbox" v-model="task.completed" />
+                            {{ task.taskName }}
+                          </a>
+                   
+                </article>
+            </div>
+            <!--Col 3-->
+            <div class="column is-one-quarter">
+                <aside class="menu">
+                    <p class="menu-label">
+                      Types of Tasks
+                    </p>
+                    <ul class="menu-list">
+                      <li><a>School Work</a></li>
+                      <li><a>General Life tasks</a></li>
+                      <li><a>For Fun!</a></li>
+                    </ul>
+                  </aside>
+            </div>
+        </div>
+    </div>
+    <!--VUE scripts are the last portion in the body-->
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    //userInput allows us to use the user's input
+                    userInput : ' ',
+                    //currentTab allows us to see what tab we are on
+                    currentTab : 'All',
+                    //taskArray allows us to keep track of task titles, and whether or not they are completed
+                        //It is an array of objects, where each array element has a string to hold the task name
+                        //and a Boolean to track if it has been completed or not
+                    taskArray : [ 
+                        {taskName : 'Do the dishes', completed: true},
+                        {taskName : 'Take out the trash', completed: false},      
+                        {taskName : 'Grade Labs', completed: false}
+                    ]
+                }
+            },
+            methods: {
+                //adding a task CHANGES the array, so it belongs in the methods section
+                addCurrentTask() {
+                    //the user's input was captured in userInput- this should be the new task name
+                    //the status of this is current, so false should be the completed value
+                    //we are adding to the top of the list, so we use the unshift method
+                    this.taskArray.unshift({taskName : this.userInput, completed : false});
+                    //now we reset the string for the next unser input
+                    this.userInput = '';
+                }
+            },
+            computed: {
+                //filtering the currentTab's tasks DOES NOT CHANGE the array, so it belongs in the computed section
+                tabTasks() {
+                    switch(this.currentTab){
+                        case 'Completed':
+                            //return an array of objects where completed == true
+                            return this.taskArray.filter(task => task.completed);
+                        case 'Current':
+                            //return an array of objects where completed == false
+                            return this.taskArray.filter(task => !task.completed);
+                        default:
+                            //return the entire array
+                            return this.taskArray;
+                    }
+                }
+            },
+        }).mount('#app')
+    </script>
+</body>
+</html>
