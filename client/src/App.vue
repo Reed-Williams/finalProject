@@ -11,20 +11,8 @@ import ToDoBlock from './components/toDoBlock.vue';
 
 <template>
 <Nav></Nav>
-<div class="columns">
-  <div class="column is-one-quarter">
-    <h1 class="title">Activity Notifications:</h1>
-    <MissedNotification msg="Lift"></MissedNotification>
-    <UpcommingNotification msg="Run with Coach"></UpcommingNotification>
-    <FutureNotification msg="Hike in Minnewaska"></FutureNotification>
-    <FutureNotification msg="Yoga"></FutureNotification>
-  </div>
-  <div class="column is-half">
-    <ToDoBlock></ToDoBlock>
-  </div>
-  <div class="column is-one-quarter">
-    <Menu></Menu>
-  </div>
+<div>
+  <router-view />
 </div>
 <Footer></Footer>
 </template>

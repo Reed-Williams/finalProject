@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
+
 </script>
 
 <template>
@@ -18,26 +20,29 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item">
+      <router-link class="navbar-item" to =/>
         Home
-      </a>
+      </router-link>
 
-      <a class="navbar-item">
-        Profile
-      </a>
+      <router-link class="navbar-item" to = /about>
+        About Us
+      </router-link>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
-          Exercise Log
+          Tasks
         </a>
 
         <div class="navbar-dropdown">
-          <a class="navbar-item">
-            My Activity 
-          </a>
-          <a class="navbar-item">
-            Community Activity
-          </a>
+          <router-link class="navbar-item" to = /assignedTasks>
+            My Tasks 
+          </router-link>
+          <router-link class="navbar-item" to = /createdTasks>
+            Your Tasks 
+          </router-link>
+          <router-link class="navbar-item" to = /calendar>
+            Calendar 
+          </router-link>
         </div>
       </div>
     </div>
@@ -45,12 +50,12 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
+          <router-link class="button is-primary" to = /signUp>
             <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
+          </router-link>
+          <router-link class="button is-light" to = /login>
             Log in
-          </a>
+          </router-link>
         </div>
       </div>
     </div>
