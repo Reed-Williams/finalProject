@@ -1,0 +1,35 @@
+<script setup lang="ts">
+
+import { RouterLink } from 'vue-router';
+
+import session, {Logout} from "../models/session";
+
+</script>
+
+<template>
+    <!--Here we have what gets shown if no one is logged in-->
+    <div class="buttons" v-if="!session.user">
+            <router-link class="button" to = /signup>
+              <strong>Sign up</strong>
+            </router-link>
+            <router-link class="button" to = /login>
+              <strong>Login</strong>
+            </router-link>
+    </div>
+
+    <!--Here we have user information if someone is logged in-->
+    <div class="buttons" v-else>
+        <div class="avatar">
+                {{ session.user.name}} @ {{ session.user.username}}
+                <br />
+                <i>{{ session.user.email }}</i>
+        </div>
+        <a class="button us-primary" @click="Logout()">
+            <strong>Log out</strong>
+        </a>
+    </div>
+</template>
+
+<style scoped>
+
+</style>

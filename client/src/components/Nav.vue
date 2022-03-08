@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
+import LoginBadge from './LoginBadge.vue';
 
 </script>
 
@@ -49,14 +50,7 @@ import { RouterLink } from 'vue-router';
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <div class="buttons">
-          <router-link class="button is-primary" to = /signUp>
-            <strong>Sign up</strong>
-          </router-link>
-          <router-link class="button is-light" to = /login>
-            Log in
-          </router-link>
-        </div>
+        <login-badge></login-badge>
       </div>
     </div>
   </div>
