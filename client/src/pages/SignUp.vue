@@ -55,20 +55,6 @@ import { RouterLink } from 'vue-router';
                         </label>
                     </div>
 
-                    <div class="field">
-                        <label class="label">Phone Number</label>
-                        <div class="control">
-                        <input class="input">
-                        </div>
-                    </div>
-
-                    <div class="block">
-                        <label class="checkbox">
-                            <input type="checkbox">
-                                Please send me text notifications when deadlines are near and when my friends assign me new tasks. 
-                        </label>
-                    </div>
-
                     <button class="button is-primary">Sign Up</button>
                     <div>
                         <span> Already have an account? <router-link to = /login class="has-text-link"> Click Here </router-link> to get back to work. </span>
