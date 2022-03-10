@@ -2,6 +2,8 @@
 
 import {ref, reactive, computed} from 'vue';
 
+import session from '../models/session';
+
 import { useTasks } from '../models/tasks';
 const taskArray = useTasks();
 
@@ -44,59 +46,59 @@ const futureDue = computed(() => {
         
         <tbody>
 
-            <tr>
-                <h1 class="subtitle">
-                    Past Due:
-                </h1>
+            <tr class="has-background-danger-light">
+                <td colspan="5"> <h1 class="subtitle"> Past Due: </h1></td>
             </tr>
 
             <tr v-for="task in pastDue" class="has-background-danger">
                 <td><p v-if="task.completed"><i class="fa-regular fa-square-check"></i></p></td>
                 <td>{{task.title}}</td>
-                <td>{{task.assignedBy}}</td>
-                <td>{{task.assignedFor}}</td>
+                <td v-if="task.assignedBy == session.user!.name"> Me </td>
+                <td v-else>{{task.assignedBy}}</td>
+                <td v-if="task.assignedFor == session.user!.name"> Me </td>
+                <td v-else>{{task.assignedFor}}</td>
                 <td>{{task.dueDate.toDateString()}}</td>
             </tr>
 
-            <tr>
-                <h1 class="subtitle">
-                    Due Today:
-                </h1>
+            <tr class="has-background-primary-light">
+                <td colspan="5"> <h1 class="subtitle"> Due Today: {{today.toDateString()}}: </h1></td>
             </tr>
 
             <tr v-for="task in dueToday" class="has-background-primary">
                 <td><p v-if="task.completed"><i class="fa-regular fa-square-check"></i></p></td>
                 <td>{{task.title}}</td>
-                <td>{{task.assignedBy}}</td>
-                <td>{{task.assignedFor}}</td>
+                <td v-if="task.assignedBy == session.user!.name"> Me </td>
+                <td v-else>{{task.assignedBy}}</td>
+                <td v-if="task.assignedFor == session.user!.name"> Me </td>
+                <td v-else>{{task.assignedFor}}</td>
                 <td>{{task.dueDate.toDateString()}}</td>
             </tr>
 
-            <tr>
-                <h1 class="subtitle">
-                    Due In the Upcoming Week:
-                </h1>
+            <tr class="has-background-warning-light">
+                <td colspan="5"> <h1 class="subtitle">Due In the Upcoming Week: {{today.toDateString()}} - {{nextWeek.toDateString()}}: </h1></td>
             </tr>
 
             <tr v-for="task in soonDue" class="has-background-warning">
                 <td><p v-if="task.completed"><i class="fa-regular fa-square-check"></i></p></td>
                 <td>{{task.title}}</td>
-                <td>{{task.assignedBy}}</td>
-                <td>{{task.assignedFor}}</td>
+                <td v-if="task.assignedBy == session.user!.name"> Me </td>
+                <td v-else>{{task.assignedBy}}</td>
+                <td v-if="task.assignedFor == session.user!.name"> Me </td>
+                <td v-else>{{task.assignedFor}}</td>
                 <td>{{task.dueDate.toDateString()}}</td>
             </tr>
 
-            <tr>
-                <h1 class="subtitle">
-                    Due in the Future:
-                </h1>
+            <tr class="has-background-success-light">
+                <td colspan="5"> <h1 class="subtitle"> Due in the Future, after {{nextWeek.toDateString()}}: </h1></td>
             </tr>
 
             <tr v-for="task in futureDue" class="has-background-success">
                 <td><p v-if="task.completed"><i class="fa-regular fa-square-check"></i></p></td>
                 <td>{{task.title}}</td>
-                <td>{{task.assignedBy}}</td>
-                <td>{{task.assignedFor}}</td>
+                <td v-if="task.assignedBy == session.user!.name"> Me </td>
+                <td v-else>{{task.assignedBy}}</td>
+                <td v-if="task.assignedFor == session.user!.name"> Me </td>
+                <td v-else>{{task.assignedFor}}</td>
                 <td>{{task.dueDate.toDateString()}}</td>
             </tr>
 

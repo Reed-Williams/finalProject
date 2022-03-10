@@ -66,8 +66,8 @@ const tabTasks = computed(() => {
                         <div class="level-item">
                             <p> <strong>{{ task.title}}</strong></p>
                             &nbsp
-                            <p v-if="task.assignedBy == session.user!.name"> Was assigned by: &nbsp <strong> Self </strong> </p>
-                            <p v-else> Was assigned by: <strong>{{task.assignedBy}} &nbsp </strong> </p>
+                            <p v-if="task.assignedBy == session.user!.name"> Was assigned by: &nbsp <strong> Me </strong> </p>
+                            <p v-else> Was assigned by:  &nbsp <strong>{{task.assignedBy}} </strong> </p>
                         </div>
                       </div>
 

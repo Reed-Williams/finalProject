@@ -24,9 +24,9 @@ import session, {Logout} from "../models/session";
                 <br />
                 <i>{{ session.user.email }}</i>
         </div>
-        <a class="button us-primary" @click="Logout()">
+        <router-link class="button us-primary" @click="Logout()" to = /login>
             <strong>Log out</strong>
-        </a>
+        </router-link>
     </div>
 </template>
 
