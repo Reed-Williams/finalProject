@@ -26,53 +26,59 @@ const tabTasks = computed(() => {
 </script>
 
 <template>
-    <div>
-        <h1>Below we have a list of tasks that have been assigned to the user: </h1>
-        <div class="columns is-centered">
-            <div class="column is-half">
-                <article class="panel">
-                    <!--First we have the clickable tabs------------------------------------------------------------------->
-                    <div class="tabs is-boxed">
-                        <!--When a tab is set to currentTab, it is active. When a tab is clicked, it is set to currentTab-->
-                        <ul>    
-                            <li :class="{ 'is-active': currentTab == 'Current' }" @click=" currentTab = 'Current' ">
-                                <a>
-                                    <span class="icon is-small"><i class="fas fa-clipboard-list"></i></span>
-                                    <span>Current</span>
-                                </a>
-                            </li>
-                            <li :class="{ 'is-active': currentTab == 'Completed' }" @click=" currentTab = 'Completed' ">
-                                <a>
-                                    <span class="icon is-small"><i class="fas fa-calendar-times"></i></span>
-                                    <span>Completed</span>
-                                </a>
-                            </li>
-                            <li :class="{ 'is-active': currentTab == 'All' }" @click=" currentTab = 'All' ">
-                                <a>
-                                    <span class="icon is-small"><i class="fas fa-calendar-day"></i></span>
-                                    <span>All</span>
-                                </a>
-                            </li>
-                        </ul>
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <article class="panel">
+                <p class="panel-heading"> Tasks for me to do... </p>
+                <!--First we have the clickable tabs------------------------------------------------------------------->
+                <div class="tabs is-boxed">
+                    <!--When a tab is set to currentTab, it is active. When a tab is clicked, it is set to currentTab-->
+                    <ul>    
+                        <li :class="{ 'is-active': currentTab == 'Current' }" @click=" currentTab = 'Current' ">
+                            <a>
+                                <span class="icon is-small"><i class="fas fa-clipboard-list"></i></span>
+                                <span>Current</span>
+                            </a>
+                        </li>
+                        <li :class="{ 'is-active': currentTab == 'Completed' }" @click=" currentTab = 'Completed' ">
+                            <a>
+                                <span class="icon is-small"><i class="fas fa-calendar-times"></i></span>
+                                <span>Completed</span>
+                            </a>
+                        </li>
+                        <li :class="{ 'is-active': currentTab == 'All' }" @click=" currentTab = 'All' ">
+                            <a>
+                                <span class="icon is-small"><i class="fas fa-calendar-day"></i></span>
+                                <span>All</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Checkbox section-->
+                <a class="panel-block" v-for="task in tabTasks" :key="task.title" :class="{ 'is-completed': currentTab != 'Completed' && task.completed }">
+                    <!-- Main container -->
+                    <div class="container level">
+                      <!-- Left side -->
+                      <div class="level-left">
+                          <div class="level-item">
+                              <input type="checkbox" v-model="task.completed" />
+                          </div>
+                        <div class="level-item">
+                            <p> <strong>{{ task.title}}</strong></p>
+                            &nbsp
+                            <p v-if="task.assignedBy == session.user!.name"> Was assigned by: &nbsp <strong> Self </strong> </p>
+                            <p v-else> Was assigned by: <strong>{{task.assignedBy}} &nbsp </strong> </p>
+                        </div>
+                      </div>
+
+                      <!-- Right side -->
+                      <div class="level-right">
+                        <p class="level-item">Due: &nbsp <strong>{{ task.dueDate.toDateString() }}</strong></p>
+                      </div>
                     </div>
+                </a>
 
-                    <!--Checkbox section-->
-                    <a class="panel-block" v-for="task in tabTasks" :key="task.title" :class="{ 'is-completed': currentTab != 'Completed' && task.completed }">
-                      <input type="checkbox" v-model="task.completed" />
-                      
-                        <div class="tags has-addons is-rounded">
-                            <span class="tag is-medium"><strong>{{ task.title}}</strong></span>
-                            <span class="tag" v-if="task.assignedBy == session.user!.name"> Was assigned by: <strong> Self </strong></span>
-                            <span class="tag" v-else> Was assigned by: <strong>{{task.assignedBy}} </strong></span>
-                            <span class="tag"> Due: <strong>{{ task.dueDate.getMonth() + 1}} / {{task.dueDate.getDate() + 1}} / {{task.dueDate.getFullYear() }}</strong> </span>
-                        </div> 
-
-                    </a>
-
-
-
-                </article>
-            </div>
+            </article>
         </div>
     </div>
 
