@@ -1,6 +1,5 @@
-import { trackSlotScopes } from '@vue/compiler-core';
 import {defineStore} from 'pinia';
-import { ref } from 'vue';
+
 import session from "./session";
 
 
@@ -9,9 +8,14 @@ export const useTasks = defineStore('tasks', {
         tasks:[
             {title: 'Do your homework', completed: true, dueDate: new Date("2/2/2022"), assignedBy:'Sally', assignedFor:'Steve' },
             {title: 'Do my homework', completed: true , dueDate: new Date("2/28/2022") , assignedBy:'Sally', assignedFor:'Sally' },
-            {title: 'Make Dinner', completed: false, dueDate: new Date("3/9/2018"), assignedBy:'Steve', assignedFor:'Percy' },
-            {title: 'Wash the dishes', completed: false, dueDate: new Date("5/6/2023"), assignedBy:'Percy', assignedFor:'Percy' },
-            {title: 'Call Mom', completed: false , dueDate: new Date("10/12/2011"), assignedBy:'Percy', assignedFor:'Sally' },
+            {title: 'Make Dinner', completed: false, dueDate: new Date("3/9/2022"), assignedBy:'Sally', assignedFor:'Percy' },
+            {title: 'Wash the dishes', completed: false, dueDate: new Date("3/10/2022"), assignedBy:'Sally', assignedFor:'Steve' },
+            {title: 'Call Mom', completed: true , dueDate: new Date("3/11/2022"), assignedBy:'Percy', assignedFor:'Sally' },
+            {title: 'Lab prep', completed: true , dueDate: new Date("3/18/2022"), assignedBy:'Percy', assignedFor:'Sally' },
+            {title: 'Get car inspected', completed: false , dueDate: new Date("3/16/2022"), assignedBy:'Percy', assignedFor:'Sally' },
+            {title: 'Schedule dentist appointment', completed: false , dueDate: new Date("3/17/2022"), assignedBy:'Steve', assignedFor:'Sally' },
+            {title: 'Homework', completed: false , dueDate: new Date("10/12/2023"), assignedBy:'Percy', assignedFor:'Sally' },
+            {title: 'Study for test', completed: true , dueDate: new Date("4/5/2022"), assignedBy:'Sally', assignedFor:'Sally' },
         ],
         titleText: '',
         dueDateText: '',

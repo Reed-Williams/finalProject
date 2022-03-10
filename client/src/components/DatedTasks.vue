@@ -36,11 +36,11 @@ const futureDue = computed(() => {
     <table class="table is-bordered is-fullwidth">
         <thead>
             <tr>
-                <th>Completion Status</th>
+                <th>Done</th>
                 <th>Task</th>
-                <th>Assigned By</th>
-                <th>Assigned For</th>
-                <th>Due Date</th>
+                <th>By</th>
+                <th>For</th>
+                <th>Due</th>
             </tr>
         </thead>
         

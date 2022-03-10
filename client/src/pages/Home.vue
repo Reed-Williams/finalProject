@@ -11,6 +11,7 @@
                 </h1>
                 <p>The organization of group collaboration is made easy when we start <strong><em>to-</em>doing</strong> things together.
                 </p>
+                <img src="https://cdn.pixabay.com/photo/2015/02/12/05/11/idea-633315__340.png">
             </div>
         </div>
     </div>

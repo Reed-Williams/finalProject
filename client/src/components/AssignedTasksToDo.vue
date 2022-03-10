@@ -26,8 +26,6 @@ const tabTasks = computed(() => {
 </script>
 
 <template>
-    <div class="columns is-centered">
-        <div class="column is-half">
             <article class="panel">
                 <p class="panel-heading"> Tasks for me to do... </p>
                 <!--First we have the clickable tabs------------------------------------------------------------------->
@@ -79,13 +77,6 @@ const tabTasks = computed(() => {
                 </a>
 
             </article>
-        </div>
-    </div>
-
-
-
-
-
 </template>
 
 <style scoped>

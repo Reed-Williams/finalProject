@@ -24,19 +24,19 @@ function sallyLogin()
         <div class="column is-two-thirds">
 
             <!--Button to display a login that works-->
-            <div class="box">
-                <h1>Example of a successful Login</h1>
-                <br>
+            <div class="section">
+                <h1>Shortcut to login to Sally's account:</h1>
                 <button class="button is-primary" @click="sallyLogin">
                     <span class="icon">
                         <i class="fa fa-sign-in"></i>
                     </span>
                     <span>SallyLoginTest</span>
                 </button>
+                <p class="pt-3">You may also type in a valid username and password below.</p>
             </div>
             <!--End Button to display a login that works-->
 
-            <div class="section is-medium is-centered">
+            <div class="section is-centered">
                 <div class="title">
                     Welcome Back!
                 </div>

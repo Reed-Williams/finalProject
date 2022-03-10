@@ -33,15 +33,15 @@
                             </table>
                         </div>
                     </div>
-                <p> OR you can simpley click the <strong>Sally Login</strong> button to login to Sally's account. A list of user information can be found in <em>/models/user.ts</em>. </p>
+                <p> OR you can simply click the <strong>SallyLoginTest</strong> button to login to Sally's account. A list of user information can be found in <em>/models/user.ts</em>. </p>
                 </div>
                 <br>
                 <div class="content">
                     Once you are logged in, you can view the protected routes to the three pages in the <strong>Task</strong> dropdown menu in the nav bar:
                     <ul>
-                        <li>Tasks For Me</li>
-                        <li>Tasks I Made</li>
-                        <li>Tasks Organized By Due Date</li>
+                        <li>Tasks Assigned to Me</li>
+                        <li>Tasks Created by Me</li>
+                        <li>Tasks Grouped by Date</li>
                     </ul>
                     <br>
                     <div class="columns is-centered">
