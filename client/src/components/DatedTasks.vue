@@ -5,7 +5,7 @@ import {ref, reactive, computed} from 'vue';
 import { useTasks } from '../models/tasks';
 const taskArray = useTasks();
 
-const sortedTasks = taskArray.getAllUserAssociatedTasks.slice().sort((a,b) => a.dueDate - b.dueDate);
+const sortedTasks = taskArray.getAllUserAssociatedTasks.slice().sort((a,b) => a.dueDate.getTime() - b.dueDate.getTime());
 
   
 const today = new Date();
