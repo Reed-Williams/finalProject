@@ -35,6 +35,9 @@ const router = createRouter({
 
 //routes with requiements 
 router.beforeEach((to, from) => {
+    if(session.destinationUrl == null && to.path != '/login') {
+        session.destinationUrl = to.path;
+    }
     if (['/assignedTasks', '/calendar', '/createdTasks', '/success'].includes(to.path)) { 
         if (!session.user) {
             return '/login';

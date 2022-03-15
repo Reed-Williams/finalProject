@@ -5,6 +5,8 @@ import * as users from "../models/user"
 
 const session = reactive({
     user: null as users.User | null,
+    //make destinationUrl to save link for deep linking
+    destinationUrl: null as string | null,
 })
 
 export async function Login(username: string, password: string) {
@@ -16,7 +18,8 @@ export async function Login(username: string, password: string) {
         throw { message: "Incorrect password" };
     }
     session.user = user;
-    router.push('/success');
+    router.push(session.destinationUrl  ?? '/success');
+    //router.push('./success');
 }
 
 export function Logout() {
