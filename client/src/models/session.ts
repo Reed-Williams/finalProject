@@ -1,6 +1,8 @@
 import {reactive} from 'vue';
 import router from "../router";
 
+import { useAlerts } from './alerts';
+
 import * as users from "../models/user"
 
 const session = reactive({
@@ -11,19 +13,33 @@ const session = reactive({
 
 export async function Login(username: string, password: string) {
     const user = users.list.find(u => u.username === username);
-    if (!user) {
-        throw { message: "User not found" };
+    const alerts = useAlerts();
+
+    try {
+        if (!user) {
+            throw { message: "User not found" };
+        }
+        if(user.password !== password) {
+            throw { message: "Incorrect password" };
+        } 
+
+        session.user = user;
+        router.push(session.destinationUrl  ?? '/success');
+        //router.push('/success');
+
+    } catch (error: any) {
+        alerts.notifications.push({
+            type: "danger",
+            message: error.message,
+        });
     }
-    if(user.password !== password) {
-        throw { message: "Incorrect password" };
-    }
-    session.user = user;
-    router.push(session.destinationUrl  ?? '/success');
-    //router.push('./success');
+    
 }
 
 export function Logout() {
     session.user = null;
+    session.destinationUrl = null;
+    router.push('/login');
 }
     
 export default session;

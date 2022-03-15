@@ -3,9 +3,12 @@ import { RouterLink } from 'vue-router';
 import {ref} from 'vue';
 
 import { Login } from '../models/session';
+import { useAlerts } from '../models/alerts'
+import Alerts from '../components/Alerts.vue';
 
 const kbUsername = ref('');
 const kbPassword = ref('');
+const alerts = useAlerts();
 
 function login()
 {
@@ -20,6 +23,7 @@ function sallyLogin()
 </script>
 
 <template>
+<alerts />
     <div class="columns is-centered">
         <div class="column is-two-thirds">
 
@@ -55,7 +59,10 @@ function sallyLogin()
                         </div>
                     </div>
 
-                    <button class="button is-primary" @click.prevent="login">Sign in</button>
+                    
+                    <button v-if="alerts.notifications.length ==2" class="button is-primary" @click.prevent="alerts.close(1); login()">Sign in</button>
+                    <button v-else class="button is-primary" @click.prevent="login">Sign in</button>
+
                     <div>
                         <span> Don't have an account? <router-link to = /signUp class="has-text-link"> Click Here </router-link> to join us. </span>
                     </div>
