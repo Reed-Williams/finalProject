@@ -1,0 +1,34 @@
+GET http://localhost:3000/api/
+####
+GET http://localhost:3000/api/users/
+####
+POST http://localhost:3000/api/users/
+Content-Type: application/json
+
+{
+    "name": "NewTestUser",
+    "username": "testing123",
+    "email": "test@gmail.com"
+}
+####
+PATCH http://localhost:3000/api/users/4
+Content-Type: application/json
+
+{
+  "name": "Mr.NewTestUser"
+}
+
+####
+DELETE http://localhost:3000/api/users/4
+
+####
+GET http://localhost:3000/api/tasks/
+
+####
+GET http://localhost:3000/api/tasks/assignedBy/1
+
+####
+GET http://localhost:3000/api/tasks/assignedFor/1
+
+####
+GET http://localhost:3000/api/tasks/associatedWith/1

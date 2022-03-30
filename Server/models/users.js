@@ -45,11 +45,7 @@ function remove(id){
 function update(id, newUser){
     const index = list.findIndex(user => user.id === parseInt(id));
     const oldUser = list[index];
-
     newUser = list[index] = { ...oldUser, ...newUser };
-
-    console.log(list);
-    
     return { ...newUser, password: undefined};
 }
 
