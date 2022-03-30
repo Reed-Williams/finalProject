@@ -1,5 +1,6 @@
 const express = require('express');
 const usersController = require('./controllers/users');
+const tasksController = require('./controllers/tasks');
 const app = express()
 const port = 3000
 app
@@ -13,6 +14,8 @@ app
     })
     //call the users controller file to return user info
     .use('/api/users', usersController)
+    //call the tasks controller file to return task info
+    .use('/api/tasks', tasksController)
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
