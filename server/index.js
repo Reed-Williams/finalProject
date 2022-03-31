@@ -1,8 +1,8 @@
 const express = require('express');
 const usersController = require('./controllers/users');
 const tasksController = require('./controllers/tasks');
-const app = express()
-const port = 3000
+const app = express();
+const port = process.env.PORT || 3000;
 app
     //lets us serve the static files in the public folder(which should be the dist folder)
     .use('/', express.static(__dirname + '/public/'))
