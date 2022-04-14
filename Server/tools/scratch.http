@@ -1,34 +1,43 @@
-GET http://localhost:3000/api/
-####
+http://localhost:3000
+
+###
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "name": "Albert",
+    "username": "natureLover",
+    "password": "hugatree123",
+    "email": "greena43@newpaltz.edu"
+}
+
+###
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+    "username": "natureLover",
+    "password": "hugatree123"
+}
+
+###
+POST http://localhost:3000/api/users/seed
+
+###
 GET http://localhost:3000/api/users/
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU4MzRmYjU2YTE2ZGJjOTYyMDRlZjUiLCJuYW1lIjoiQWxiZXJ0IiwidXNlcm5hbWUiOiJuYXR1cmVMb3ZlciIsImVtYWlsIjoiZ3JlZW5hNDNAbmV3cGFsdHouZWR1IiwiaWQiOjQsImlhdCI6MTY0OTk0ODE5OH0.Zxz5aZ733YGjndUIITeYv1ORNQNic8OgCWMk4aS5pZI
+
+###
+DELETE  http://localhost:3000/api/users/625834fb56a16dbc96204ef5
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU4MzRmYjU2YTE2ZGJjOTYyMDRlZjUiLCJuYW1lIjoiQWxiZXJ0IiwidXNlcm5hbWUiOiJuYXR1cmVMb3ZlciIsImVtYWlsIjoiZ3JlZW5hNDNAbmV3cGFsdHouZWR1IiwiaWQiOjQsImlhdCI6MTY0OTk0ODE5OH0.Zxz5aZ733YGjndUIITeYv1ORNQNic8OgCWMk4aS5pZI
+
 ####
-POST http://localhost:3000/api/users/
+GET http://localhost:3000/api/users/username/natureLover
+
+###
+PATCH http://localhost:3000/api/users/62583849bb7d940ce107e173
 Content-Type: application/json
 
 {
-    "name": "NewTestUser",
-    "username": "testing123",
-    "email": "test@gmail.com"
+  "name": "Albert Green"
 }
-####
-PATCH http://localhost:3000/api/users/4
-Content-Type: application/json
-
-{
-  "name": "Mr.NewTestUser"
-}
-
-####
-DELETE http://localhost:3000/api/users/4
-
-####
-GET http://localhost:3000/api/tasks/
-
-####
-GET http://localhost:3000/api/tasks/assignedBy/1
-
-####
-GET http://localhost:3000/api/tasks/assignedFor/1
-
-####
-GET http://localhost:3000/api/tasks/associatedWith/1
