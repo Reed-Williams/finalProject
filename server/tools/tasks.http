@@ -1,0 +1,49 @@
+
+###
+POST http://localhost:3000/api/tasks/seed
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU4MzRmYjU2YTE2ZGJjOTYyMDRlZjUiLCJuYW1lIjoiQWxiZXJ0IiwidXNlcm5hbWUiOiJuYXR1cmVMb3ZlciIsImVtYWlsIjoiZ3JlZW5hNDNAbmV3cGFsdHouZWR1IiwiaWQiOjQsImlhdCI6MTY0OTk0ODE5OH0.Zxz5aZ733YGjndUIITeYv1ORNQNic8OgCWMk4aS5pZI
+
+###
+GET http://localhost:3000/api/tasks/
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU4MzRmYjU2YTE2ZGJjOTYyMDRlZjUiLCJuYW1lIjoiQWxiZXJ0IiwidXNlcm5hbWUiOiJuYXR1cmVMb3ZlciIsImVtYWlsIjoiZ3JlZW5hNDNAbmV3cGFsdHouZWR1IiwiaWQiOjQsImlhdCI6MTY0OTk0ODE5OH0.Zxz5aZ733YGjndUIITeYv1ORNQNic8OgCWMk4aS5pZI
+
+###
+GET http://localhost:3000/api/tasks/assignedBy/seashellSeller
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU4MzRmYjU2YTE2ZGJjOTYyMDRlZjUiLCJuYW1lIjoiQWxiZXJ0IiwidXNlcm5hbWUiOiJuYXR1cmVMb3ZlciIsImVtYWlsIjoiZ3JlZW5hNDNAbmV3cGFsdHouZWR1IiwiaWQiOjQsImlhdCI6MTY0OTk0ODE5OH0.Zxz5aZ733YGjndUIITeYv1ORNQNic8OgCWMk4aS5pZI
+
+###
+GET http://localhost:3000/api/tasks/assignedFor/seashellSeller
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU4MzRmYjU2YTE2ZGJjOTYyMDRlZjUiLCJuYW1lIjoiQWxiZXJ0IiwidXNlcm5hbWUiOiJuYXR1cmVMb3ZlciIsImVtYWlsIjoiZ3JlZW5hNDNAbmV3cGFsdHouZWR1IiwiaWQiOjQsImlhdCI6MTY0OTk0ODE5OH0.Zxz5aZ733YGjndUIITeYv1ORNQNic8OgCWMk4aS5pZI
+
+###
+GET http://localhost:3000/api/tasks/associatedWith/seashellSeller
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU4MzRmYjU2YTE2ZGJjOTYyMDRlZjUiLCJuYW1lIjoiQWxiZXJ0IiwidXNlcm5hbWUiOiJuYXR1cmVMb3ZlciIsImVtYWlsIjoiZ3JlZW5hNDNAbmV3cGFsdHouZWR1IiwiaWQiOjQsImlhdCI6MTY0OTk0ODE5OH0.Zxz5aZ733YGjndUIITeYv1ORNQNic8OgCWMk4aS5pZI
+
+####
+POST http://localhost:3000/api/tasks
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU4MzRmYjU2YTE2ZGJjOTYyMDRlZjUiLCJuYW1lIjoiQWxiZXJ0IiwidXNlcm5hbWUiOiJuYXR1cmVMb3ZlciIsImVtYWlsIjoiZ3JlZW5hNDNAbmV3cGFsdHouZWR1IiwiaWQiOjQsImlhdCI6MTY0OTk0ODE5OH0.Zxz5aZ733YGjndUIITeYv1ORNQNic8OgCWMk4aS5pZI
+Content-Type: application/json
+
+{
+    "title": "Test all controller functions",
+    "completed": false,
+    "dueDate": "2022-02-28T05:00:00.000Z",
+    "assignedBy": "natureLover",
+    "assignedFor": "seashellSeller"
+}
+
+####
+PATCH http://localhost:3000/api/tasks/6258454ea735b074bf5cb079
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU4MzRmYjU2YTE2ZGJjOTYyMDRlZjUiLCJuYW1lIjoiQWxiZXJ0IiwidXNlcm5hbWUiOiJuYXR1cmVMb3ZlciIsImVtYWlsIjoiZ3JlZW5hNDNAbmV3cGFsdHouZWR1IiwiaWQiOjQsImlhdCI6MTY0OTk0ODE5OH0.Zxz5aZ733YGjndUIITeYv1ORNQNic8OgCWMk4aS5pZI
+Content-Type: application/json
+
+{
+    "title": "Test 2 controller functions",
+    "completed": true
+}
+
+####
+DELETE http://localhost:3000/api/tasks/6258454ea735b074bf5cb079
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU4MzRmYjU2YTE2ZGJjOTYyMDRlZjUiLCJuYW1lIjoiQWxiZXJ0IiwidXNlcm5hbWUiOiJuYXR1cmVMb3ZlciIsImVtYWlsIjoiZ3JlZW5hNDNAbmV3cGFsdHouZWR1IiwiaWQiOjQsImlhdCI6MTY0OTk0ODE5OH0.Zxz5aZ733YGjndUIITeYv1ORNQNic8OgCWMk4aS5pZI
+
+####
