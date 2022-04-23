@@ -2,22 +2,25 @@
 import { RouterLink } from 'vue-router';
 import {ref} from 'vue';
 
-import { Login } from '../models/session';
+import { useSession } from '../models/session';
+
 import { useAlerts } from '../models/alerts'
 import Alerts from '../components/Alerts.vue';
+
 
 const kbUsername = ref('');
 const kbPassword = ref('');
 const alerts = useAlerts();
+const session = useSession();
 
 function login()
 {
-    Login(kbUsername.value, kbPassword.value)
+    session.Login(kbUsername.value, kbPassword.value)
 }
 
 function sallyLogin()
 {
-    Login('seashellSeller', 'starfish')
+    session.Login('seashellSeller', 'starfish')
 }
 
 </script>
@@ -30,7 +33,7 @@ function sallyLogin()
             <!--Button to display a login that works-->
             <div class="section">
                 <h1>Shortcut to login to Sally's account:</h1>
-                <button class="button is-primary" @click="sallyLogin">
+                <button class="button is-primary" @click.prevent="sallyLogin">
                     <span class="icon">
                         <i class="fa fa-sign-in"></i>
                     </span>

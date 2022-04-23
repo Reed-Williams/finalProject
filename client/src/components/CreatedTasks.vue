@@ -2,7 +2,8 @@
 import {ref, computed} from 'vue';
 
 import { useTasks } from '../models/tasks';
-import session from "../models/session";
+import { useSession } from '../models/session';
+const session = useSession();
 
 const taskArray = useTasks();
 

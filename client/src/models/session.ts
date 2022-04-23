@@ -1,45 +1,71 @@
-import {reactive} from 'vue';
 import router from "../router";
-
+import * as users from "../models/user";
 import { useAlerts } from './alerts';
+import { api } from "./myFetch";
+import { defineStore } from "pinia";
 
-import * as users from "../models/user"
+export const useSession = defineStore('session', {
+    state: () => ({
+        user: null as users.User | null,
+        destinationUrl: null as string | null,
+    }),
+    actions: {
+        async Login(username: string, password: string) {
 
-const session = reactive({
-    user: null as users.User | null,
-    //make destinationUrl to save link for deep linking
-    destinationUrl: null as string | null,
+            const alerts = useAlerts();
+        
+            try {
+                const user = await this.api("users/login", { username, password });
+                if(user) {
+        
+                    alerts.notifications.push({
+                        type: "success",
+                        message: `Welcome back ${user.username}!`,
+                    });
+        
+                    this.user = user;
+                    router.push(this.destinationUrl ?? '/success');
+                }
+        
+            } catch (error: any) {
+                alerts.notifications.push({
+                    type: "danger",
+                    message: error.message,
+                });
+            }
+        },
+        
+        Logout() {
+            this.user = null;
+            router.push('/login');
+        },
+
+        async api(url: string, data?: any, method?: 'GET' | 'POST' | 'PUT' | 'DELETE', headers: any = {}) {
+            const alerts = useAlerts();
+
+            if(this.user?.token) {
+                headers.Authorization = `Bearer ${this.user.token}`;
+            }
+
+            try {
+                const response = await api(url, data, method, headers);
+                if(response.errors?.length) {
+                    throw { message: response.errors.join(', ') };
+                }
+                return await response.data;                
+            } catch (error: any) {
+                alerts.notifications.push({
+                    type: "danger",
+                    message: error.message,
+                });
+            }
+
+        }
+    },
 })
 
-export async function Login(username: string, password: string) {
-    const user = users.list.find(u => u.username === username);
-    const alerts = useAlerts();
-
-    try {
-        if (!user) {
-            throw { message: "User not found" };
-        }
-        if(user.password !== password) {
-            throw { message: "Incorrect password" };
-        } 
-
-        session.user = user;
-        router.push(session.destinationUrl  ?? '/success');
-        //router.push('/success');
-
-    } catch (error: any) {
-        alerts.notifications.push({
-            type: "danger",
-            message: error.message,
-        });
-    }
-    
+export interface ApiResult {
+    data: any;
+    errors?: string[];
+    success: boolean;
 }
-
-export function Logout() {
-    session.user = null;
-    session.destinationUrl = null;
-    router.push('/login');
-}
-    
-export default session;

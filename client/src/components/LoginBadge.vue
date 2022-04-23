@@ -1,8 +1,9 @@
 <script setup lang="ts">
 
 import { RouterLink } from 'vue-router';
+import { useSession } from '../models/session';
+const session = useSession();
 
-import session, {Logout} from "../models/session";
 
 </script>
 
@@ -24,7 +25,7 @@ import session, {Logout} from "../models/session";
                 <br />
                 <i>{{ session.user.email }}</i>
         </div>
-        <router-link class="button us-primary" @click="Logout()" to = /login>
+        <router-link class="button us-primary" @click="session.Logout()" to = /login>
             <strong>Log out</strong>
         </router-link>
     </div>

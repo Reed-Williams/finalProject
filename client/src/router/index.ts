@@ -10,7 +10,8 @@ import Home from '../pages/Home.vue';
 import Login from '../pages/Login.vue';
 import SignUp from '../pages/SignUp.vue';
 //import SuccessfulLogin from '../pages/SuccessfulLogin.vue';
-import session from "../models/session";
+import { useSession } from '../models/session';
+
 
 //route array
 const routes: RouteRecordRaw[] = [
@@ -35,6 +36,7 @@ const router = createRouter({
 
 //routes with requiements 
 router.beforeEach((to, from) => {
+    const session = useSession();
     console.log('New path click');
     console.log({ to });
     console.log({ from });

@@ -2,10 +2,10 @@
 
 import {ref, reactive, computed} from 'vue';
 
-import session from '../models/session';
-
+import { useSession } from '../models/session';
 import { useTasks } from '../models/tasks';
 const taskArray = useTasks();
+const session = useSession();
 
 const sortedTasks = taskArray.getAllUserAssociatedTasks.slice().sort((a,b) => a.dueDate.getTime() - b.dueDate.getTime());
 

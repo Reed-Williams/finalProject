@@ -1,6 +1,7 @@
 import {defineStore} from 'pinia';
-
-import session from "./session";
+import { api } from './myFetch';
+//import session from "./session";
+import { User } from './user';
 
 
 export const useTasks = defineStore('tasks', {
@@ -24,29 +25,29 @@ export const useTasks = defineStore('tasks', {
     }),
 
     getters :{
-        getCompletedAssignedTasks() : { title: string, completed: boolean, dueDate: Date, assignedBy: string, assignedFor: string}[] {
+        getCompletedAssignedTasks() : Task[] {
             return this.tasks.filter(task => (task.assignedFor === session.user!.name) && (task.completed))
         },
-        getUncompletedAssignedTasks() : { title: string, completed: boolean, dueDate: Date, assignedBy: string, assignedFor: string}[] {
+        getUncompletedAssignedTasks() : Task[] {
             return this.tasks.filter(task => (task.assignedFor === session.user!.name) && (!task.completed))
         },
-        getAllAssignedTasks() : { title: string, completed: boolean, dueDate: Date, assignedBy: string, assignedFor: string}[] {
+        getAllAssignedTasks() : Task[] {
             return this.tasks.filter(task => (task.assignedFor === session.user!.name))
         },
 
 
-        getCompletedCreatedTasks() : { title: string, completed: boolean, dueDate: Date, assignedBy: string, assignedFor: string}[] {
+        getCompletedCreatedTasks() : Task[] {
             return this.tasks.filter(task => (task.assignedBy === session.user!.name) && (task.completed) );
         },
-        getUncompletedCreatedTasks() : { title: string, completed: boolean, dueDate: Date, assignedBy: string, assignedFor: string}[] {
+        getUncompletedCreatedTasks() : Task[] {
             return this.tasks.filter(task => (task.assignedBy === session.user!.name) && (!task.completed));
         },
-        getAllCreatedTasks() : { title: string, completed: boolean, dueDate: Date, assignedBy: string, assignedFor: string}[] {
+        getAllCreatedTasks() : Task[] {
             return this.tasks.filter(task => task.assignedBy === session.user!.name);
         },
 
         
-        getAllUserAssociatedTasks() : { title: string, completed: boolean, dueDate: Date, assignedBy: string, assignedFor: string}[] {
+        getAllUserAssociatedTasks() : Task[] {
             return this.tasks.filter(task => (task.assignedBy === session.user!.name || task.assignedFor === session.user!.name));
         },
     },
@@ -61,3 +62,13 @@ export const useTasks = defineStore('tasks', {
         }
     }
 })
+
+export interface Task { 
+    title: string; 
+    completed: boolean;
+    dueDate: Date;
+    assignedBy: string;
+    userAB : User;
+    assignedFor: string;
+    userAF : User
+ }
