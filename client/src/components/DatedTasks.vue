@@ -7,7 +7,9 @@ import { useTasks } from '../models/tasks';
 const taskArray = useTasks();
 const session = useSession();
 
-const sortedTasks = taskArray.getAllUserAssociatedTasks.slice().sort((a,b) => a.dueDate.getTime() - b.dueDate.getTime());
+
+taskArray.getAllUserAssociatedTasks();
+const sortedTasks = (taskArray.list).sort((a,b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
 
   
 const today = new Date();
@@ -15,17 +17,17 @@ const nextWeek = new Date(((new Date()).getTime() + (7 * 24 * 60 * 60 * 1000)));
 
 
 const pastDue = computed(() => {
-    return sortedTasks.filter(task => (task.dueDate.getTime() < today.getTime())&& (task.dueDate.toDateString() !== today.toDateString()));
+    return sortedTasks.filter(task => (new Date(task.dueDate).getTime() < today.getTime())&& (new Date(task.dueDate).toDateString() !== today.toDateString()));
 });
 const dueToday = computed(()=> {
-    return sortedTasks.filter(task => (task.dueDate.toDateString() === today.toDateString()));
+    return sortedTasks.filter(task => (new Date(task.dueDate).toDateString() === today.toDateString()));
 });
 const soonDue = computed(() => {
-    return sortedTasks.filter(task => ((task.dueDate.getTime() > today.getTime())
-                                    && (task.dueDate.getTime() < nextWeek.getTime() ))  );
+    return sortedTasks.filter(task => ((new Date(task.dueDate).getTime() > today.getTime())
+                                    && (new Date(task.dueDate).getTime() < nextWeek.getTime() ))  );
 });
 const futureDue = computed(() => {
-    return sortedTasks.filter(task => (task.dueDate.getTime() > nextWeek.getTime())  );
+    return sortedTasks.filter(task => (new Date(task.dueDate).getTime() > nextWeek.getTime())  );
 });
 
 </script>
@@ -53,11 +55,11 @@ const futureDue = computed(() => {
             <tr v-for="task in pastDue" class="has-background-danger">
                 <td><p v-if="task.completed"><i class="fa-regular fa-square-check"></i></p></td>
                 <td>{{task.title}}</td>
-                <td v-if="task.assignedBy == session.user!.name"> Me </td>
+                <td v-if="task.assignedBy == session.user!.username"> Me </td>
                 <td v-else>{{task.assignedBy}}</td>
-                <td v-if="task.assignedFor == session.user!.name"> Me </td>
+                <td v-if="task.assignedFor == session.user!.username"> Me </td>
                 <td v-else>{{task.assignedFor}}</td>
-                <td>{{task.dueDate.toDateString()}}</td>
+                <td>{{new Date(task.dueDate).toDateString()}}</td> 
             </tr>
 
             <tr class="has-background-primary-light">
@@ -67,11 +69,11 @@ const futureDue = computed(() => {
             <tr v-for="task in dueToday" class="has-background-primary">
                 <td><p v-if="task.completed"><i class="fa-regular fa-square-check"></i></p></td>
                 <td>{{task.title}}</td>
-                <td v-if="task.assignedBy == session.user!.name"> Me </td>
+                <td v-if="task.assignedBy == session.user!.username"> Me </td>
                 <td v-else>{{task.assignedBy}}</td>
-                <td v-if="task.assignedFor == session.user!.name"> Me </td>
+                <td v-if="task.assignedFor == session.user!.username"> Me </td>
                 <td v-else>{{task.assignedFor}}</td>
-                <td>{{task.dueDate.toDateString()}}</td>
+                <td>{{new Date(task.dueDate).toDateString()}}</td> 
             </tr>
 
             <tr class="has-background-warning-light">
@@ -81,11 +83,11 @@ const futureDue = computed(() => {
             <tr v-for="task in soonDue" class="has-background-warning">
                 <td><p v-if="task.completed"><i class="fa-regular fa-square-check"></i></p></td>
                 <td>{{task.title}}</td>
-                <td v-if="task.assignedBy == session.user!.name"> Me </td>
+                <td v-if="task.assignedBy == session.user!.username"> Me </td>
                 <td v-else>{{task.assignedBy}}</td>
-                <td v-if="task.assignedFor == session.user!.name"> Me </td>
+                <td v-if="task.assignedFor == session.user!.username"> Me </td>
                 <td v-else>{{task.assignedFor}}</td>
-                <td>{{task.dueDate.toDateString()}}</td>
+                <td>{{new Date(task.dueDate).toDateString()}}</td> 
             </tr>
 
             <tr class="has-background-success-light">
@@ -95,11 +97,11 @@ const futureDue = computed(() => {
             <tr v-for="task in futureDue" class="has-background-success">
                 <td><p v-if="task.completed"><i class="fa-regular fa-square-check"></i></p></td>
                 <td>{{task.title}}</td>
-                <td v-if="task.assignedBy == session.user!.name"> Me </td>
+                <td v-if="task.assignedBy == session.user!.username"> Me </td>
                 <td v-else>{{task.assignedBy}}</td>
-                <td v-if="task.assignedFor == session.user!.name"> Me </td>
+                <td v-if="task.assignedFor == session.user!.username"> Me </td>
                 <td v-else>{{task.assignedFor}}</td>
-                <td>{{task.dueDate.toDateString()}}</td>
+                <td>{{new Date(task.dueDate).toDateString()}}</td> 
             </tr>
 
         </tbody>

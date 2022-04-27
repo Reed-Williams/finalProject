@@ -3,6 +3,7 @@
     import { useSession } from '../models/session';
     const { task, words, who } = defineProps<{ task: Task, words: string, who: string }>();
     const session = useSession();
+    const taskDate = (new Date (task.dueDate)).toDateString();
 
 </script>
 
@@ -21,7 +22,7 @@
         </div>
 
         <div class="level-right">
-            <p class="level-item">Due: &nbsp <strong> {{task.dueDate}}</strong></p>
+            <p class="level-item">Due: &nbsp <strong> {{taskDate}}</strong></p>
         </div>
     </div>
 </a>
