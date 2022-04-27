@@ -15,14 +15,14 @@ app
     .get('/', requireAuth, (req, res, next) => {
         userModel.getList()
         .then(users => {
-            res.send(users);
+            res.send({ success: true, errors: [], data: user });
         }).catch(next);
     })
     //we can get a single user by their username
     .get('/username/:username', (req, res, next) => {
         userModel.getByUsername(req.params.username)
         .then(user => {
-            res.send(user);
+            res.send({ success: true, errors: [], data: user });
         }).catch(next);
     })
     //we can get a single user based on their id number
@@ -30,14 +30,14 @@ app
 
         userModel.get(req.params.id)
         .then(user => {
-            res.send(user);
+            res.send({ success: true, errors: [], data: user });
         }).catch(next);
     })
     //we can make a new user
     .post('/', (req, res, next) => {
         userModel.create(req.body)
         .then(user=> {
-            res.status(CREATED_STATUS).send(user); 
+            res.send({ success: true, errors: [], data: user }); 
         })
         .catch(next);
     })
@@ -59,7 +59,7 @@ app
     .post('/login', (req, res, next) => {
         userModel.login(req.body.username, req.body.password)
         .then(user => {
-            res.send(user);
+            res.send({ success: true, errors: [], data: user });
         }).catch(next);
     })
     //we can enter data in list to database

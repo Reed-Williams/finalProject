@@ -11,6 +11,12 @@ const port = process.env.PORT || 3000;
 app
     //lets us serve the static files in the public folder(which should be the dist folder)
     .use('/', express.static(__dirname + '/public/'))
+    //cors
+    .use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+      next();
+    })
     //lets the server parse incomming json text
     .use(express.json())
     //next we need authentication to go further
