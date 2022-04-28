@@ -1,9 +1,12 @@
 <script setup lang="ts">
-    import { Task } from '../models/tasks';
+    import { Task, useTasks } from '../models/tasks';
     import { useSession } from '../models/session';
     const { task, words, who } = defineProps<{ task: Task, words: string, who: string }>();
     const session = useSession();
+    const tasks = useTasks();
     const taskDate = (new Date (task.dueDate)).toDateString();
+
+
 
 </script>
 
@@ -11,7 +14,7 @@
 <a class="panel-block" >
     <div class="container level"> 
         <div class="level-left">
-            <input type = "checkbox" v-model="task.completed" />
+            <input type = "checkbox" v-model="task.completed" @click="tasks.updateTask(task)"/>
         </div>
 
         <div class="level-item">

@@ -37,10 +37,11 @@ export const useSession = defineStore('session', {
         
         Logout() {
             this.user = null;
+            this.destinationUrl = null;
             router.push('/login');
         },
 
-        async api(url: string, data?: any, method?: 'GET' | 'POST' | 'PUT' | 'DELETE', headers: any = {}) {
+        async api(url: string, data?: any, method?: 'GET' | 'POST' | 'PATCH' | 'DELETE', headers: any = {}) {
             const alerts = useAlerts();
 
             if(this.user?.token) {

@@ -35,7 +35,15 @@ export const useTasks = defineStore('tasks', {
             }
             const newTask = await this.session.api('tasks', task, "POST");
             this.list.push(newTask);
+        },
+
+        //method to update task when field is check-marked
+        async updateTask(task: Task){
+            const id = task._id;
+            const data = { completed : !task.completed}
+            const newTask = await this.session.api('tasks/' + id , data, "PATCH");
         }
+
     }
 })
 
@@ -49,3 +57,4 @@ export interface Task {
     assignedFor: string;
     userAF ?: User
  }
+
