@@ -1,16 +1,15 @@
 <script setup lang="ts">
 
-import {ref, reactive, computed} from 'vue';
-import { Task, useTasks } from "../models/tasks"
-import { useSession } from '../models/session';
+import {ref, computed} from 'vue';
+import { useTasks } from "../models/tasks"
 import TaskView from '../components/TaskView.vue';
+
 const tasks = useTasks();
-const session = useSession();
-
 tasks.getAllAssignedTasks();
-const description = "was assigned by"
 
+const description = "was assigned by"
 const currentTab = ref ( 'All' );
+
 const tabTasks = computed(() => {
     switch(currentTab.value){
         case 'Completed':

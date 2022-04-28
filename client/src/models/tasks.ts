@@ -10,18 +10,6 @@ export const useTasks = defineStore('tasks', {
         session: useSession(),
     }),
       actions:{
-        async fetchUserTasks() {
-            console.log("In fetchUserTasks");
-            //if(this.session.user){
-                console.log("In fetchUserTasks if statement");
-                console.log(this.session.user)
-                const tasks = await this.session.api('tasks');
-                console.log(tasks);
-                this.list = tasks;
-                console.log(this.list);
-            //}
-            return tasks;
-        },
         //methods that need to get tasks assigned for the user
         async getAllAssignedTasks() {
             const tasks : Task[] = await this.session.api('tasks/assignedFor/' + this.session.user?.username, undefined, "GET");
@@ -35,10 +23,9 @@ export const useTasks = defineStore('tasks', {
         },
 
         //methods that need to get all tasks associated to a user /associatedWith/
-        async getAllUserAssociatedTasks() {
-            const tasks = await this.session.api('tasks/associatedWith/' + this.session.user?.username, undefined, "GET");
-            this.list = tasks;
-            return this.list;
+        async getAllUserTasksSorted() {
+            const tasks : Task[] = await this.session.api('tasks/associatedWith/' + this.session.user?.username, undefined, "GET");
+            this.list = tasks.sort((a,b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
         },
 
         //method to add new task 

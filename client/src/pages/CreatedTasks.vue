@@ -6,12 +6,13 @@ import { useSession } from '../models/session';
 import TaskView from '../components/TaskView.vue';
 import TaskEdit from '../components/TaskEdit.vue'
 
+
 const tasks = useTasks();
+tasks.getAllCreatedTasks();
+
 const session = useSession();
 const newTask = reactive<Task>( {  title: "", completed: false, dueDate: new Date(), assignedBy: session.user?.username || "", assignedFor: "" });
- 
 
-tasks.getAllCreatedTasks();
 const description = "was assigned for"
 
 const currentTab = ref ( 'All' );
