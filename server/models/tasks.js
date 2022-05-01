@@ -68,6 +68,7 @@ async function getAssociatedWith(username){
 
 async function create(task) {
     task.id = ++highestId;
+    task.dueDate = new Date(task.dueDate);
     const result = await collection.insertOne(task);
     task = await get(result.insertedId);
     return  task;
