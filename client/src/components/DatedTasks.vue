@@ -8,8 +8,8 @@ const taskArray = useTasks();
 const session = useSession();
 
 
-taskArray.getAllUserAssociatedTasks();
-const sortedTasks = (taskArray.list).sort((a,b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
+taskArray.getAllUserTasksSorted();
+//const sortedTasks = (taskArray.list).sort((a,b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
 
   
 const today = new Date();
@@ -17,17 +17,17 @@ const nextWeek = new Date(((new Date()).getTime() + (7 * 24 * 60 * 60 * 1000)));
 
 
 const pastDue = computed(() => {
-    return sortedTasks.filter(task => (new Date(task.dueDate).getTime() < today.getTime())&& (new Date(task.dueDate).toDateString() !== today.toDateString()));
+    return taskArray.list.filter(task => (new Date(task.dueDate).getTime() < today.getTime())&& (new Date(task.dueDate).toDateString() !== today.toDateString()));
 });
 const dueToday = computed(()=> {
-    return sortedTasks.filter(task => (new Date(task.dueDate).toDateString() === today.toDateString()));
+    return taskArray.list.filter(task => (new Date(task.dueDate).toDateString() === today.toDateString()));
 });
 const soonDue = computed(() => {
-    return sortedTasks.filter(task => ((new Date(task.dueDate).getTime() > today.getTime())
+    return taskArray.list.filter(task => ((new Date(task.dueDate).getTime() > today.getTime())
                                     && (new Date(task.dueDate).getTime() < nextWeek.getTime() ))  );
 });
 const futureDue = computed(() => {
-    return sortedTasks.filter(task => (new Date(task.dueDate).getTime() > nextWeek.getTime())  );
+    return taskArray.list.filter(task => (new Date(task.dueDate).getTime() > nextWeek.getTime())  );
 });
 
 </script>
