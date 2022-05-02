@@ -8,6 +8,7 @@ const alerts = useAlerts();
     <div class="column is-10"></div>
     <div v-for=" (x, i) in alerts.notifications">
         <div v-if="x.message != '' " :class="`column notification is-light is-${x.type}`">
+            <button class="delete" @click="alerts.close(i)" ></button>
             {{ x.message }}
         </div>
     </div>
