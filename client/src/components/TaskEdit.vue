@@ -13,7 +13,7 @@
                         <span class="icon is-left"><i class="fa-solid fa-pencil" aria-hidden="true"></i></span>
                     </p>
                     <p class="control has-icons-left">
-                        <input class="input is-primary" type="text" placeholder="Who is this task for?" v-model="task.assignedFor">
+                        <input class="input is-primary" type="text" placeholder="Enter a valid username" v-model="task.assignedFor">
                         <span class="icon is-left"><i class="fa-solid fa-user" aria-hidden="true"></i></span>
                     </p>
                     <p class="control has-icons-left">

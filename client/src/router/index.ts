@@ -37,20 +37,6 @@ const router = createRouter({
 //routes with requiements 
 router.beforeEach((to, from) => {
     const session = useSession();
-    console.log('New path click');
-    console.log({ to });
-    console.log({ from });
-    console.log('destination before if statement:')
-    console.log(session.destinationUrl);
-    //if(session.destinationUrl == null && to.path != '/login') {
-    //    session.destinationUrl = to.path;
-   // }
-    //if(to.path != '/login'){
-      //  session.destinationUrl = to.path;}
-    
-    
-    console.log('destination After if statement:');
-    console.log(session.destinationUrl);
     if (['/assignedTasks', '/calendar', '/createdTasks', '/success'].includes(to.path)) { 
         if (!session.user) {
             session.destinationUrl = to.path;

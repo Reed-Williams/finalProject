@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
+import Alerts from '../components/Alerts.vue';
 
 </script>
 
 <template>
+<alerts></alerts>
     <div class="section is-medium">
         <div class="columns is-centered">
             <div class="column is-half">
