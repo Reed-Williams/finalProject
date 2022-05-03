@@ -8,7 +8,12 @@
             <h1 class="title">About Page</h1>
             <h2 class="subtitle">Description of my App</h2>
             <div class="content">
-                <p> You can log into one of three accounts at the <strong>Login</strong> page by typing in a matching username and password from the table below:</p>
+                <p> <strong> The sign-up page is fully functioning and will make a new user in the database. If the two passwords do not match when setting up the user, a notification pops up. If required fields are missing, an error also pops up.</strong> </p>
+                
+                <p> <strong> The tasks also function through the database. New tasks are added using a POST method; when check boxes are checked the data base is updated with a PATCH method.</strong></p>
+
+                <p> You can log into one of various accounts at the <strong>Login</strong> page by typing in a matching username and password from the table below:</p>
+                
                     <div class="columns is-centered">
                         <div class="column is-half">
                             <table class="table is-bordered is-narrow is-hoverable">
@@ -29,11 +34,20 @@
                                         <td>percyJackson</td>
                                         <td>blueberry</td>
                                     </tr>
+                                    <tr>
+                                        <td>williamc18</td>
+                                        <td>password</td>
+                                    </tr>
+                                    <tr>
+                                        <td>fernLover</td>
+                                        <td>npxc</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                <p> OR you can simply click the <strong>SallyLoginTest</strong> button to login to Sally's account. A list of user information can be found in <em>/models/user.ts</em>. </p>
+                <p> OR you can simply click the <strong>SallyLoginTest</strong> button to login to Sally's account. </p>
+                <p>OR you can make a new account on the <strong>Sign Up Page</strong></p>
                 </div>
                 <br>
                 <div class="content">
@@ -44,6 +58,7 @@
                         <li>Tasks Grouped by Date</li>
                     </ul>
                     <br>
+                    <p>The tasks are all in the database, and the database is updated when new tasks are created or when the check box is checked.</p>
                     <div class="columns is-centered">
                         <div class="column is-2">
                             <h1 class="title is-6">Tasks For Me</h1>
@@ -67,9 +82,15 @@
                             </p>
                         </div>
                     </div>
-                </div>
+                </div><p>Unfortunately, something is missing with regards to the authentication. Through console.log statements, I know my bearer tokens are 
+        being created properly, but when I try to uncomment the 'requireAuth' segment when <em>server/index.js</em> passes control over to
+        the tasks controller, I end up with a CORS issue that I could not figure out how to fix. On github in the class project, 'requireAuth'
+        is commented out, so I decided to leave my project that way. 
+    </p>
             </div>
     </div>
+
+    
 </template>
 
 <style scoped>
