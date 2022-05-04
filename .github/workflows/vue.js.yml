@@ -17,6 +17,7 @@ jobs:
       with:
         node-version: 16.x
     - name: Build vite
+      env:
       run: |
           npm install
           npm run build --if-present
@@ -30,11 +31,12 @@ jobs:
           cp -a client/dist/. server/public/
           rm -r client .gitignore
           
-    - name: Deploy 🚀
+    - name: Deploy 🚀 Github Pages
       uses: JamesIves/github-pages-deploy-action@v4.2.3
       with:
           branch: gh-pages # The branch the action should deploy to.
           folder: server/public # The folder the action should deploy. 
+          
     - name: Deploy 🚀 to Heroku
       uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
