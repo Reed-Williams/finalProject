@@ -1,6 +1,7 @@
-const API_URL = 'http://localhost:3001/api/';
+const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost.3001/api/';
 
 export function api(url: string, body?: any, method?: string, headers?: HeadersInit) {
+    
     let options: RequestInit = { headers };
 
     if (body) {
@@ -14,8 +15,9 @@ export function api(url: string, body?: any, method?: string, headers?: HeadersI
             body: JSON.stringify(body) // body data type must match "Content-Type" header
         };
     }
+
         
 
-
+    console.log(options);
     return fetch( API_URL + url, options).then(res => res.json());
 }
