@@ -33,8 +33,8 @@ jobs:
     - name: Copy static files & delete sources
       run: |
           ls -a
-          mkdir -p server/public/
-          cp -a client/dist/. server/public/
+          mkdir -p Server/public/
+          cp -a client/dist/. Server/public/
           rm -r client .gitignore
           
     - name: Deploy 🚀 Github Pages
