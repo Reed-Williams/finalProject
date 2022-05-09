@@ -8,6 +8,11 @@ on:
   workflow_dispatch:
 jobs:
   build:
+
+    strategy:
+      matrix:
+        host: ['github-pages', 'heroku']
+
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -18,10 +23,10 @@ jobs:
         node-version: 16.x
     - name: Build vite
       env:
-          VITE_API_URL: ${{secrets.VITE_API_URL}}
+          VITE_API_URL: "https://${{secrets.VITE_API_URL}}.herokuapp.com/api/"
       run: |
           npm install
-          npm run build --if-present
+          npx vue-tsc --noEmit && npx vite build --base=${{ matrix.host == 'github-pages' && '/finalProject/' || '' }}/
           npm run test --if-present
       working-directory: client
 
@@ -33,12 +38,14 @@ jobs:
           rm -r client .gitignore
           
     - name: Deploy 🚀 Github Pages
+      if:   matrix.host == 'github-pages'
       uses: JamesIves/github-pages-deploy-action@v4.2.3
       with:
           branch: gh-pages # The branch the action should deploy to.
           folder: server/public # The folder the action should deploy. 
 
     - name: Deploy 🚀 to Heroku
+      if:   matrix.host == 'heroku'
       uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
