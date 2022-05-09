@@ -42,7 +42,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4.2.3
       with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: server/public # The folder the action should deploy. 
+          folder: Server/public # The folder the action should deploy. 
 
     - name: Deploy 🚀 to Heroku
       if:   matrix.host == 'heroku'
