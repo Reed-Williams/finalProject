@@ -3,6 +3,7 @@ import * as users from "../models/user";
 import { useAlerts } from './alerts';
 import { api } from "./myFetch";
 import { defineStore } from "pinia";
+import { User } from "../models/user";
 
 export const useSession = defineStore('session', {
     state: () => ({
@@ -32,6 +33,7 @@ export const useSession = defineStore('session', {
                     type: "danger",
                     message: error.message,
                 });
+
             }
         },
         
@@ -39,6 +41,21 @@ export const useSession = defineStore('session', {
             this.user = null;
             this.destinationUrl = null;
             router.push('/login');
+        },
+
+        async getUsersByPattern(s: String) {
+            const alerts = useAlerts();
+            try{
+                //use the session api to access the search method
+                const users: User[] = await this.api("users/search/" + s, null, "GET");
+                return users;
+            }
+            catch (error: any) {
+                alerts.notifications.push({
+                    type: "danger",
+                    message: error.message,
+                });
+            }
         },
 
         async api(url: string, data?: any, method?: 'GET' | 'POST' | 'PATCH' | 'DELETE', headers: any = {}) {

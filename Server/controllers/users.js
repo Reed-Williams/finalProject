@@ -11,11 +11,18 @@ const userModel = require('../models/users');
 const CREATED_STATUS = 201;
 
 app
+    //accessing the search method
+    .get('/search/:s', (req, res, next) => {
+        userModel.search(req.params.s)
+        .then(users => {
+            res.send({ success: true, errors: [], data: users });
+        }).catch(next);
+    })
     //we can get the whole list, with authentication
-    .get('/', requireAuth, (req, res, next) => {
+    .get('/', /*requireAuth,*/ (req, res, next) => {
         userModel.getList()
         .then(users => {
-            res.send({ success: true, errors: [], data: user });
+            res.send({ success: true, errors: [], data: users });
         }).catch(next);
     })
     //we can get a single user by their username

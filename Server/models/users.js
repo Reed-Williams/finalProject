@@ -117,6 +117,16 @@ function seed(){
     return collection.insertMany(list);
 }
 
+//new function for searching by first letter(s):
+async function search(s){
+    const users = await collection.find({ $or:[
+        {username:{$regex: s, $options:'i'}},
+        {name: {$regex: s, $options:'i'}},
+        {email: {$regex: s, $options:'i'}}
+    ]}).toArray();
+    return users;
+}
+
 module.exports = {
     collection,
     seed,
@@ -127,6 +137,7 @@ module.exports = {
     update,
     login,
     fromToken,
+    search,
     //we say getList because java script can't have async getters 
     async getList(){
         //the await needs to be wrapped in ( ) bc map needs an array not a promise

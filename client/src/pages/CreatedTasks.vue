@@ -11,6 +11,8 @@ const tasks = useTasks();
 tasks.getAllCreatedTasks();
 
 const session = useSession();
+const users = session.getUsers();
+
 const newTask = reactive<Task>( {  title: "", completed: false, dueDate: new Date(), assignedBy: session.user?.username || "", assignedFor: "" });
 
 
@@ -66,7 +68,7 @@ const tabTasks = computed(() => {
                     </ul>
                 </div>
                 <!--Form section-->
-                <task-edit :task="newTask" @save="tasks.addNewTask(newTask)"> </task-edit>
+                <task-edit :task="newTask" :userList="users" @save="tasks.addNewTask(newTask)"> </task-edit>
                 <!--Checkbox section-->
                 <task-view v-for="task in tabTasks" :key="task._id" :task="task" :words="description" :who="task.assignedFor"> </task-view>
 
